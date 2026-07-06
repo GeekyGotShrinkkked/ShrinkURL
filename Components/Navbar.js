@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
         <nav className="h-16 bg-purple-700 flex justify-between px-3 items-center text-white ">
             <div className = "logo font-bold text-lg">
-                ShrinkURL
+                <Link href="/" ><li>ShrinkURL</li></Link>
             </div>
             <ul className = " flex justify-center gap-4 items-center ">
                 <Link href="/" ><li>Home</li></Link>

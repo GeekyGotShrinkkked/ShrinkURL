@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import Shorten from "../app/Shorten/page";
+import Shorten from "../app/shorten/page";
 
 const Navbar = () => {
     return (

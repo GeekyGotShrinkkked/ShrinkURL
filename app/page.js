@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Shorten from "./Shorten/page";
+import shorten from "./shorten/page";
 
 
 export default function Home() {

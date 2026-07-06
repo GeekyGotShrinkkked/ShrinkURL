@@ -12,7 +12,7 @@ export async function GET() {
 
     const doc = await collection.findOne({shortUrl: body.shortUrl}) 
     if(doc){
-        return Response.json({ success: true, error: false, message: 'URL Already Exists' })
+        return Response.json({ success: false, error: true, message: 'URL Already Exists' })
 
     }
 
@@ -20,7 +20,6 @@ export async function GET() {
         url: body.url,
         shortUrl:body.shortUrl
     })
-
 
   return Response.json({ success: true, error: false, message: 'URL Generated Successfully' })
 }

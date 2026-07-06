@@ -53,7 +53,7 @@ const shorten = () =>
       </div>
 
       {generated && <> <span className='font-bold text-lg'>Your Link </span><code><Link target="_blank" href={generated}>{generated}</Link> 
-                </code></>}
+      </code></>}
     </div>
   );
 };

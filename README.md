@@ -90,7 +90,3 @@ npm start
 
 - Contact form submissions are UI-only right now — see the comment in `app/contact/ContactForm.js` for the `/api/contact` route it expects.
 - Click analytics / stats shown on the homepage are placeholder figures.
-
-## License
-
-Add your license of choice here.

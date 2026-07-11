@@ -1,19 +1,17 @@
-import { redirect } from "next/navigation"
-import clientPromise from "../lib/mongodb"
-
+import { redirect } from "next/navigation";
+import clientPromise from "../lib/mongodb";
 
 export default async function Page({ params }) {
-  const {shortUrl} = await params
+  const { url: shortUrl } = await params;
   const client = await clientPromise;
-  const db = client.db("shrinkURL")
-  const collection = db.collection("url") 
+  const db = client.db("shrinkURL");
+  const collection = db.collection("url");
 
-  const doc = await collection.findOne({shortUrl: shortUrl}) 
-    if(doc){
-        redirect(doc.url)
-    }
+  const doc = await collection.findOne({ shortUrl });
 
-    else{
-      redirect(`${process.env.NEXT_PUBLIC_HOST}`)
-    }
+  if (doc) {
+    redirect(doc.url);
+  } else {
+    redirect("/");
+  }
 }

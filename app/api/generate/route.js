@@ -1,25 +1,32 @@
-import clientPromise from "@/app/lib/mongodb"
+import clientPromise from "@/app/lib/mongodb";
 
+export async function POST(request) {
+  const body = await request.json();
 
-export async function GET() {
+  if (!body?.url || !body?.shorturl) {
+    return Response.json(
+      { success: false, error: true, message: "URL and short link text are required" },
+      { status: 400 }
+    );
+  }
 
-    const body = await request.json()
-    const client = await clientPromise;
-    const db = client.db("shrinkURL")
-    const collection = db.collection("url") 
+  const client = await clientPromise;
+  const db = client.db("shrinkURL");
+  const collection = db.collection("url");
 
-    // check if the short url exist
+  // check if the short url already exists
+  const doc = await collection.findOne({ shortUrl: body.shorturl });
+  if (doc) {
+    return Response.json(
+      { success: false, error: true, message: "That short link is already taken" },
+      { status: 409 }
+    );
+  }
 
-    const doc = await collection.findOne({shortUrl: body.shortUrl}) 
-    if(doc){
-        return Response.json({ success: false, error: true, message: 'URL Already Exists' })
+  await collection.insertOne({
+    url: body.url,
+    shortUrl: body.shorturl,
+  });
 
-    }
-
-    const result = await collection.insertOne({
-        url: body.url,
-        shortUrl:body.shortUrl
-    })
-
-  return Response.json({ success: true, error: false, message: 'URL Generated Successfully' })
+  return Response.json({ success: true, error: false, message: "URL generated successfully" });
 }
